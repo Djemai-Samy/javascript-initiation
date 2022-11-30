@@ -1,8 +1,8 @@
-# Javascript: Initiation
+# Javascript: Introduction
 
 Apprendre les bases du langage Javascript, pour construire des pages web dynamiques et interactives.
 
-Exemple: Les variables, les blocs structurels, les fonctions, les objets, la manipulation du DOM...
+Dans ce chapitre nous allons voir comment Javascript fonctionne et apprendre à utiliser les outils nécessaires pour développer avec ce langage.
 
 [Suivre tous les tutoriels sur mon site:](https://djemai-samy.com/posts/0.javascript-initiation)
 
@@ -17,189 +17,159 @@ Il est conseillé d'avoir suivi les series:
 
 ---
 
-## 1/ Comprendre les animations
+## Qu'est-ce que le JavaScript ?
 
-Les animations CSS permettent de créer des transitions entre plusieurs états de mise en forme.
+JavaScript est un langage de programmation qui permet d'implémenter des mécanismes
+complexes sur une page web.
 
-Une animation est décrite par deux choses :
+À chaque fois qu'une page web fait plus que simplement
+afficher du contenu statique — afficher du contenu mis à jour à des temps déterminés,
+des cartes interactives, des animations 2D/3D, des menus vidéo défilants, ou autre,
+JavaScript a de bonnes chances d'être impliqué.
 
-- Des propriétés propres à l'animation afin de la configurer la durée, le minutage et d'autres détails à propos de l'animation.
-- Un ensemble d'étapes (```keyframes```) qui indiquent l'état initial, final et éventuellement des états intermédiaires.
+C'est la troisième couche des technologies standards du web, les deux premières (HTML et CSS)
 
-## 2/ Les étapes d'une animation
+---
 
-Afin de créer une animation en CSS, on utilise la règle ```@keyframes``` suivi par le nom de l'animation et des accolades ```{}```.
+## Que peut-il vraiment faire ?
 
-Puis entre les accolades, nous précisons les étapes exprimées en pourcentage.
+Le cœur de JavaScript est constitué de fonctionnalités communes de programmation permettant de :
 
-- ```0%``` indique l'état initial de l'animation.
-- ```100%``` indique l'état final.
+- Stocker des valeurs utiles dans des variables.
+- Faire des opérations sur des morceaux de texte (appelés en programmation « chaînes de caractères » ou « strings » en anglais).
+- Créer des fonctions, objet et classes pour mieux organiser le code.
 
-Pour l'exemple nous allons créer une animation qui changera la couleur d'un carré representé dans notre HTML par une div:
+Et des fonctionnalités spécifique au développement web:
+
+- Exécuter du code en réponse à certains événements se produisant sur une page web.
+- Faire des requêtes vers d'autres applications pour recevoir des données.
+- Manipuler les éléments du document HTML pour ajouter, modifier ou supprimer du contenu.
+- Et bien d'autres choses...
+
+---
+
+## Comment le Javascript fonctionne ?
+
+Commençons par un bref récapitulatif de ce qui se passe lorsqu'une page web se charge dans le navigateur:
+
+[Voir Comment fonctionnent vraiment les CSS](https://djemai-samy.com/posts/1.css-introduction.article)
+
+Quand la page se charge, les codes HTML, CSS et JavaScript s'exécutent dans un environnement (l'onglet du navigateur).
+
+C'est un peu comme une usine qui prend des matières premières (le code) et sort un produit (la page web).
+
+![Comment une page web est créer](https://djemai-samy.com/blog/2.programmation/1.web/3.javascript/1.javascript-initiation/1.javascript-introduction/javascript-introduction-navigateur.svg)
+
+Le JavaScript est exécuté par le moteur JavaScript du navigateur suivant l'ordre dans lequel il a été executer.
+
+Souvent, nous voulons que le code JavaScript s'execute après que le HTML et le CSS ont été assemblés et combinés en une page web..
+
+Cet enchaînement est nécessaire pour être sûr que la structure et le style de la page sont déjà en place quand le JavaScript commence son exécution.
+
+---
+
+## 1/ Ajouter du code JavaScript
+
+Le JavaScript est appliqué à votre page HTML un peu comme le CSS.
+
+Pour ajouter du JavaScript à un document HTML, il n'y a qu'une seule façon : avec l'élément `<script>`.
+
+---
+
+### 1.1/ javascript interne
+
+Dans votre document HTML:
 
 ```html
-<div class="square" id="change-color"></div>
+<!DOCTYPE html>
+<html lang="fr">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>1/ Javascript: Introduction</title>
+ </head>
+ <body>
+  <h1>1/ Javascript: Introduction</h1>
+
+  <!-- 1. Balise pour ajouter le JavaScript -->
+  <script>
+   //2. Ceci est un commentaire en JavaScript
+
+   //3. Une instruction JavaScript
+   console.log("Salut le monde");
+  </script>
+ </body>
+</html>
 ```
 
-puis dnas notre CSS:
+- `1`: La balise script peut être ajoutée partout dans le document, souvent nous la mettons à la fin de la balise body pour exécuter le code après avoir chargé toute la page. Ou dans le head, en ajoutant l'attribut `defer` pour exécuter le code après le chargement.
+- `2`: Comme avec le HTML et le CSS (Tous les langages pratiquement), nous pouvons ajouter des commentaires dans notre code. Les commentaires ne sont pas exécutés et ne sont là que pour aider le développeur à mieux documenter et expliquer leur code.
+- `3`: Le code Javascript ira entre les deux balises `<script>`, dans l'exemple nous avons utilisé une instruction qui permet d'afficher quelque chose dans la console Javascript du navigateur.
 
-```css
-.square{
-    height:200px;
-    width:200px;
-}
+![console du navigateur pour afficher le Javascript](https://djemai-samy.com/blog/2.programmation/1.web/3.javascript/1.javascript-initiation/1.javascript-introduction/javascipt-introduction-console.svg)
 
-@keyframes changeColorAnimations{
-    0%{
-        background-color:red;
-    }
-    100%{
-        background-color:blue;
-    }
-}
-```
+La console JavaScript du navigateur est accéssible dans l'onglet console quand on inspecte la page web.
 
 ---
 
-## 3/ Paramétrer l'animation
+### 1.2/ JavaScript externe
 
-Maintenant que notre animation est déclarée, nous devons la lier avec l'élément HTML à animer. Dans notre cas, il s'agit de la div possédant l'identifiant ```#change-color```:
+Comme pour le CSS, souvent nous voulons séparer le code JavaScript dans des fichier dédié.
 
-```css
-#change-color{
-    animation-name:changeColorAnimation;
-    animation-duration: 2s;
-    animation-iteration-count:infinite;
-}
-```
+1. Créez d'abord un nouveau fichier dans le même répertoire que votre fichier HTML. Nommez-le `script.j`s (vérifiez qu'il a bien l'extension de fichier .js, c'est ainsi qu'il est identifié comme fichier JavaScript).
+2. Ensuite, copiez-collez tout le script contenu dans l'élément `<script>` vers le fichier .js, et enregistrez le fichier.
+3. remplacez l'élément `<script>` par :
 
-![La timeline de l'animation](https://djemai-samy.com/blog/2.programmation/1.web/2.css/1.css-initiation/5.css-animations/2.changeColor.svg)
+   ```html
+   <script src="./script.js"></script>
+   ```
 
-Toutes les paramètres possible sont :
-
-- ```animation-name```: Cette propriété permet de déclarer un nom qui pourra être utilisé comme référence à l'animation pour la règle ```@keyframes```.
-
-- ```animation-duration```: Cette propriété définit la durée d'un cycle de l'animation.
-
-- ```animation-iteration-count```: Cette propriété détermine le nombre de fois que l'animation est répétée. On peut utiliser le mot-clé ```infinite``` afin de répéter une animation infiniment.
-
-- ```animation-delay```: Cette propriété définit le délai entre le moment où l'élément est chargé et le moment où l'animation commence.
-
-- ```animation-direction```: Cette propriété indique si l'animation doit alterner entre deux directions de progressions (faire des allers-retours) ou recommencer au début à chaque cycle de répétition.
-
-- ```animation-fill-mode```: Cette propriété indique les valeurs qui doivent être appliquées aux propriétés avant et après l'exécution de l'animation.
-
-- ```animation-play-state```: Cette propriété permet d'interrompre (« pause ») ou de reprendre l'exécution d'une animation.
-
-- ```animation-timing-function```: Cette propriété configure la fonction de minutage d'une animation, autrement dit comment celle-ci accélère entre l'état initial et l'état final notamment grâce à des fonctions décrivant des courbes d'accélération.
+4. Enregistrez et rechargez la page dans votre navigateur, et vous devriez voir la même chose qu'avant.
 
 ---
 
-### 3.1/ Etapes intermédiaires
+## 2/ Les erreurs
 
-Afin d'ajouter des étapes intermédiaires, il suffit d'ajouter des ```keyframes``` entre ```0%``` et ```100%```:
+Il existe deux genre d'erreurs:
 
-```css
-@keyframes changeColorAnimations{
-    0%{
-        background-color:red;
-    }
-    50%{
-        background-color:green;
-    }
-    100%{
-        background-color:blue;
-    }
-}
+### 2.1/ Les erreurs de syntaxe
+
+Ce sont les fautes d'orthographe. Elles empêchent réellement le programme de fonctionner ou l'arrêtent en cours de chemin — elles sont accompagnées de messages d'erreur.
+
+Ces erreurs sont généralement simple à corriger, pour autant que vous connaissiez les bons outils et sachiez ce que signifient les messages.
+
+Par exemple ce code:
+
+```js
+Ceci provoque une erreur de syntaxe.
 ```
 
-![La timeline de l'animation avec 3 étapes](https://djemai-samy.com/blog/2.programmation/1.web/2.css/1.css-initiation/5.css-animations/4.changeColor3key.svg)
+Provoquera une erreur, visible dans la console:
 
----
+![Erreur syntaxe javascript sur la console](https://djemai-samy.com/blog/2.programmation/1.web/3.javascript/1.javascript-initiation/1.javascript-introduction/javascipt-introduction-error.svg)
 
-### 3.2/ Direction d'une animation
+#### 2.2/ Les erreurs de logique
 
-Pour illustrer notre exemple, nous allons ajouter une nouvelle ```div```:
+La syntaxe est correcte, mais le code n'est pas ce que vous attendiez.
 
-```html
-<div class="square" id="move"></div>
-```
+Le programme tourne sans planter mais donne des résultats inattendus.
 
-Puis dans le CSS, ajoutons une nouvelle animations:
+Ces erreurs sont souvent plus difficiles à corriger que les erreurs de syntaxe, car il n'y a pas, en général, de message d'erreur pour vous diriger vers la source de l'erreur.
 
-```css
-#move{
-    background-color:purple;
-    animation-name: moveAnimation;
-    animation-duration: 2s;
-    animation-iteration-count:infinite;
-}
-@keyframes moveAnimation{
-    0%{
-        transform: translateX(0) rotate(0deg) scale(1);
-        border-radius: 5px;
-    }
-    100%{
-        transform: translateX(100%) rotate(180deg) scale(0.5);
-        border-radius: 50%;
-    }
-}
-```
+Il existe plusieurs outils pour `debugger` le code, nous les verrons plus tard dans la serie.
 
-On a donc une animation qui se répète mais on obtient un résultat étrange, l'animation redémarre à chaque fois depuis l'état initial.
-
-Si on veut que l'élément aille de droite à gauche puis de gauche à droite, on pourra utiliser la propriété ```animation-direction``` avec la valeur ```alternate```.
-
----
-
-### 3.2/ Accélération d'une animation
-
-Nous avons la possibilité de modifié l'accélération de l'élément entre l'état initial et l'état final notamment grâce aux courbes de bézier. (Par défaut, l'accélération est lineaire).
-
-- ```animation-timing-function:linear```.
-- ```animation-timing-function:ease-in-out```.
-- ```animation-timing-function: cubic-bezier(.77,-0.02,.16,1.01)```.
-
-il existe plusieurs site permettant de configurer et générer les coordonnés tout en visualisant la courbe, voici un exemple de site:
-[www.cubic-bezier.com](https://cubic-bezier.com/#.17,.67,.83,.67)
-
----
-
-## 5/ Raccoucie
-
-La propriété raccourcie animation permet d'économiser de l'espace. Par exemple, si on prend cette règle :
-
-```css
-#move{
-    background-color:purple;
-    animation-name: moveAnimation;
-    animation-duration: 2s;
-    animation-iteration-count:infinite;
-    animation-direction: alternate;
-    animation-timing-function: cubic-bezier(.77,-0.02,.16,1.01);
-}
-        ```
-On peut la réécrire de façon plus concise :
-
-```css
-#move{
-    background-color:purple;
-    animation: moveAnimation 2s infinite cubic-bezier(.77,-0.02,.16,1.01) alternate;
-}
-```
-
----
+Le terme `debugger` signifi trouver le bug et non pas enlever le bug.
 
 ## Conclusion
 
-Dans cet article nous avons vu comment animer n'importe quel propriété de n'importe quel élément HTML.
+Nous avons commencé par la théorie seule, pour vous habituer aux raisons d'utiliser JavaScript, et à ses possibilités.
 
-Dans la partie suivante, nous allons utiliser tous ce que nous avons vu pendant cette serie de tutoriels, dans un cas concret, pour créer une page web.
+Dans le prochain chapitre nous allons commencer à découvrir les notions de bases de la programmation, en utilisant JavaScript comme langage.
 
 ---
 
 ## Aller plus loin
 
-[Précédent: CSS: Les Boîtes](https://djemai-samy.com/posts/4.css-transformations.article)
+[Précédent: CSS: Initiation](https://djemai-samy.com/posts/0.css-initation)
 
-[Suivant: CSS: Styliser une page](https://djemai-samy.com/posts/6.css-page.article)
+[Suivant: Javascript: Les variables](https://djemai-samy.com/posts/2.javascript-variables.article)
