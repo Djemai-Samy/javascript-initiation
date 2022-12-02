@@ -605,7 +605,7 @@ produits[5];// undefined
 Vous pouvez aussi modifier un élément dans un tableau en donnant simplement une nouvelle valeur à l'élément. Essayez ceci :
 
 ```js
-produits[0] = "";// 'crème de sésame';
+produits[0] = "crème de sésame";// 'crème de sésame';
 produits;// ['crème de sésame', 'lait', 'fromage', 'houmous', 'nouilles']
 ```
 
