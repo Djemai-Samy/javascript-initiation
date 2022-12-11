@@ -11,6 +11,7 @@ Exemple: Les variables, les blocs structurels, les fonctions, les objets, la man
 - [Javascript: Blocs structurels](https://djemai-samy.com/posts/3.javascript-blocs.article)
 - [Javascript: Les fontions](https://djemai-samy.com/posts/4.javascript-functions.article)
 - [Javascript: Les objets](https://djemai-samy.com/posts/5.javascript-objects.article)
+- [Javascript: Le DOM](https://djemai-samy.com/posts/6.javascript-dom.article)
 
 ---
 
@@ -21,5 +22,6 @@ Exemple: Les variables, les blocs structurels, les fonctions, les objets, la man
 - [Javascript: Blocs structurels](https://github.com/Djemai-Samy/javascript-initiation/tree/main/3.javascript-blocs)
 - [Javascript: Les fonctions](https://github.com/Djemai-Samy/javascript-initiation/tree/main/4.javascript-functions)
 - [Javascript: Les objets](https://github.com/Djemai-Samy/javascript-initiation/tree/main/5.javascript-objects)
+- [Javascript: Le DOM](https://github.com/Djemai-Samy/javascript-initiation/tree/main/6.javascript-dom)
 
 ---

@@ -148,7 +148,4 @@ tableau.pop(); // e
 
 tableau; // ["a", "b", "c", "d"]
 
-Math.floor()
-document.getElementsByTagName
 
-for()
